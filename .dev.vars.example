@@ -1,0 +1,12 @@
+# Telegram Bot Configuration
+BOT_TOKEN=your_telegram_bot_token_here
+TG_CHAT_ID=your_admin_telegram_chat_id_here
+
+# Aptos API Configuration  
+APTOS_API_KEY=your_aptos_api_key_here
+
+# Wallet Configuration
+PRIVATE_KEY=your_aptos_wallet_private_key_here
+
+# External API Keys
+PANORA_API_KEY=your_panora_exchange_api_key_here

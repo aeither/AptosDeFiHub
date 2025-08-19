@@ -1,0 +1,30 @@
+{
+	"name": "aptosdefihub",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"dev:webhook": "pnpm exec wrangler dev src/worker.ts",
+		"dev:ngrok": "ngrok http --domain=basically-enough-clam.ngrok-free.app 3000",
+		"dev:all": "concurrently \"pnpm run dev:webhook\" \"pnpm run dev:ngrok\"",
+		"deploy": "pnpm exec wrangler deploy",
+		"secret": "wrangler secret put BOT_TOKEN",
+		"commands:setup": "pnpm run scripts/setupBotCommands.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"dotenv": "^16.5.0",
+		"tsx": "^4.7.0",
+		"wrangler": "^4.10.0"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@aptos-labs/ts-sdk": "^3.1.3",
+		"@cloudflare/workers-types": "^4.20250525.0",
+		"@hyperionxyz/sdk": "^0.0.13",
+		"concurrently": "^9.1.2",
+		"grammy": "^1.35.1"
+	}
+}
