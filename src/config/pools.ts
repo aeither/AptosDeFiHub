@@ -24,13 +24,13 @@ export const DEFAULT_POOLS_TO_MANAGE: PoolConfig[] = [
     {
         poolId: '0x925660b8618394809f89f8002e2926600c775221f43bf1919782b297a79400d8', // APT/USDC
         name: 'APT/USDC',
-        enabled: false,
-        rangePercent: 5 // null = use tightest range, or set percentage like 2 for 2%
+        enabled: true,
+        rangePercent: 7 // null = use tightest range, or set percentage like 2 for 2%
     },
     {
         poolId: '0x18269b1090d668fbbc01902fa6a5ac6e75565d61860ddae636ac89741c883cbc', // APT/USDT
         name: 'APT/USDT',
-        enabled: true,
+        enabled: false,
         rangePercent: 5 // null = use tightest range, or set percentage like 2 for 2%
     },
     {
