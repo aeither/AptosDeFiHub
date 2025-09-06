@@ -10,8 +10,8 @@ crons = ["*/5 * * * *"]  # Every 10 minutes (UTC)
 
 # KV bindings for user address tracking
 [[kv_namespaces]]
-binding = "USER_ADDRESSES"
-id = "YOUR_PRODUCTION_KV_ID_HERE"
+binding = "DEFIHUB_USER_ADDRESSES"
+id = "6377ed3fa0c6408589be0a98c9d4ef5b"
 
 # wrangler.toml (wrangler v3.88.0^)
 [observability.logs]
