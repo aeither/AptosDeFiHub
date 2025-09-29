@@ -31,17 +31,9 @@ Eliminate the complexity and constant monitoring required for DeFi liquidity man
 - **Nodit RPC**: Reliable Aptos infrastructure for on-chain monitoring and data retrieval
 - **Aptos Blockchain**: Fast, secure, and scalable Layer 1 for DeFi operations
 
-## Logo Design Prompt
+## Hyperion CLM Auto-rebalance for optimal capital efficiency
 
-Create a minimalist logo for "AptosDeFiHub" - a DeFi portfolio management bot for Aptos blockchain. The logo should combine:
-- A stylized "A" for Aptos in geometric form
-- Subtle DeFi elements like interconnected nodes or liquidity pool curves
-- Modern, clean typography with the text "AptosDeFiHub"
-- Color scheme: Deep blue (#0052FF Aptos brand) with accent mint green (#00D4AA)
-- Simple geometric shapes, minimal gradients
-- Professional, tech-focused aesthetic suitable for financial applications
-- Icon should work well at small sizes (telegram bot avatar)
-- Optional: subtle infinity symbol or circular flow representing continuous portfolio rebalancing
+<img width="1327" height="417" alt="image" src="https://github.com/user-attachments/assets/390d496c-9b0b-4ec4-b7ca-894cea27e8dd" />
 
 ## Info
 .dev for polling
