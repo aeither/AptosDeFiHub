@@ -26,6 +26,9 @@ importers:
       '@kanalabs/aggregator':
         specifier: 0.7.14-beta.15
         version: 0.7.14-beta.15(@mizuwallet-sdk/protocol@0.0.2)(@telegram-apps/bridge@1.9.2)(@wallet-standard/core@1.0.3)(aptos@1.5.0)(bufferutil@4.0.9)(ethers@5.8.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(utf-8-validate@5.0.10)(zod@3.22.3)
+      '@tapp-exchange/sdk':
+        specifier: ^0.6.1
+        version: 0.6.1
       concurrently:
         specifier: ^9.1.2
         version: 9.2.1
@@ -994,6 +997,9 @@ packages:
   '@szmarczak/http-timer@4.0.6':
     resolution: {integrity: sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==}
     engines: {node: '>=10'}
+
+  '@tapp-exchange/sdk@0.6.1':
+    resolution: {integrity: sha512-wMDaMc1tfkgn5mGkBlk5bdz/ZRNHZ7RUKHSev72nVAoowcLy7P2oai0Pict4LGNNQE+Adu8hdNoOk3rBkdXbzA==}
 
   '@telegram-apps/bridge@1.9.2':
     resolution: {integrity: sha512-SJLcNWLXhbbZr9MiqFH/g2ceuitSJKMxUIZysK4zUNyTUNuonrQG80Q/yrO+XiNbKUj8WdDNM86NBARhuyyinQ==}
@@ -3196,6 +3202,10 @@ snapshots:
   '@szmarczak/http-timer@4.0.6':
     dependencies:
       defer-to-connect: 2.0.1
+
+  '@tapp-exchange/sdk@0.6.1':
+    dependencies:
+      bignumber.js: 9.3.1
 
   '@telegram-apps/bridge@1.9.2':
     dependencies:

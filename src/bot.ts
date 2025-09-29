@@ -709,6 +709,60 @@ _Powered by Panora_
     }
   });
 
+  bot.command("tapp_pools", async (ctx) => {
+    await ctx.reply("🔄 Fetching TAPP pools...");
+    
+    try {
+      // Lazy import for TAPP operations
+      const { getTappPools, formatTappPoolsResponse } = await import("./libs/tapp");
+      
+      const pools = await getTappPools();
+      const response = await formatTappPoolsResponse(pools);
+      
+      await ctx.reply(response, { parse_mode: "Markdown" });
+    } catch (error) {
+      console.error("Error fetching TAPP pools:", error);
+      await ctx.reply("❌ Error fetching TAPP pools. Please try again later.");
+    }
+  });
+
+  bot.command("tapp_swap", async (ctx) => {
+    const input = ctx.match.trim();
+    const params = input.split(/\s+/).filter((p: string) => p.length > 0);
+    
+    // Parse parameters: /tapp_swap <poolId> <amount> <fromToken> <toToken> [a2b]
+    const poolId = params[0];
+    const amount = params[1] ? Number.parseFloat(params[1]) : null;
+    const fromToken = params[2] || 'TokenA';
+    const toToken = params[3] || 'TokenB';
+    const a2b = params[4] ? params[4].toLowerCase() === 'true' : true;
+
+    if (!poolId || !amount) {
+      await ctx.reply("Please provide pool ID and amount\nUsage: /tapp_swap <poolId> <amount> <fromToken> <toToken> [a2b]\nExample: /tapp_swap 0x123... 100 APT USDC true");
+      return;
+    }
+
+    if (isNaN(amount) || amount <= 0) {
+      await ctx.reply("❌ Invalid amount. Must be a positive number.");
+      return;
+    }
+
+    await ctx.reply("🔄 Simulating TAPP swap...");
+    
+    try {
+      // Lazy import for TAPP swap operations
+      const { simulateSwap, formatSwapSimulation } = await import("./libs/tapp/swap");
+      
+      const simulation = await simulateSwap(poolId, amount, fromToken, toToken, a2b);
+      const response = formatSwapSimulation(simulation, amount, fromToken, toToken);
+      
+      await ctx.reply(response, { parse_mode: "Markdown" });
+    } catch (error) {
+      console.error("Error simulating TAPP swap:", error);
+      await ctx.reply("❌ Error simulating TAPP swap. Please check the parameters and try again.");
+    }
+  });
+
   bot.command("start", async (ctx) => {
     await ctx.reply("Welcome to AptosDeFiHub! 🚀\n\n" +
       "📊 *Address Management:*\n" +
@@ -726,6 +780,9 @@ _Powered by Panora_
       "/prices [tokenAddress] - Get token prices (use /pools for asset types)\n" +
       "/fee_history <positionId> <address> - View fee history\n" +
       "/kofi [amount] - Compare Kofi Protocol vs Hyperion Swap conversion rates (default: 10000 APT)\n\n" +
+      "🏊 *TAPP Exchange:*\n" +
+      "/tapp_pools - List TAPP exchange pools with TVL and types\n" +
+      "/tapp_swap <poolId> <amount> <fromToken> <toToken> [a2b] - Simulate TAPP swap with price impact\n\n" +
       "🔧 *Admin Commands:*\n" +
       "/rebalance <poolId> [rangePercent] - Force rebalance all positions in pool (admin only)\n" +
       "/addliquidity <poolId> - Add liquidity to the first position in the specified pool (admin only)\n" +

@@ -27,6 +27,7 @@
 		"@injectivelabs/networks": "^1.16.10",
 		"@injectivelabs/ts-types": "^1.16.10",
 		"@kanalabs/aggregator": "0.7.14-beta.15",
+		"@tapp-exchange/sdk": "^0.6.1",
 		"concurrently": "^9.1.2",
 		"grammy": "^1.35.1"
 	}
