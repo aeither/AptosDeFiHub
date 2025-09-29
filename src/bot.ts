@@ -804,6 +804,83 @@ _Powered by Panora_
     }
   });
 
+  bot.command("kana_quotes", async (ctx) => {
+    const input = ctx.match.trim();
+    const params = input.split(/\s+/).filter((p: string) => p.length > 0);
+    
+    const fromToken = params[0];
+    const toToken = params[1];
+    const amount = params[2];
+    const slippage = params[3] ? Number.parseFloat(params[3]) : 0.5;
+
+    if (!fromToken || !toToken || !amount) {
+      await ctx.reply("Please provide all required parameters\nUsage: /kana_quotes <fromToken> <toToken> <amount> [slippage]\nExample: /kana_quotes APT USDC 100 0.5\n\nUse /kana_tokens to see available tokens");
+      return;
+    }
+
+    await ctx.reply(`🔄 Fetching Kanalabs quotes for ${amount} ${fromToken} → ${toToken}...`);
+
+    try {
+      const { kanaSwapQuotes, formatKanaQuotesResponse } = await import("./libs/kanalabs");
+      
+      const quotes = await kanaSwapQuotes(env, fromToken, toToken, amount, slippage);
+      const response = formatKanaQuotesResponse(quotes, fromToken, toToken, amount);
+      
+      await ctx.reply(response, { parse_mode: "Markdown" });
+    } catch (error) {
+      console.error("Error fetching Kana quotes:", error);
+      await ctx.reply("❌ Error fetching swap quotes. Please check the parameters and try again.");
+    }
+  });
+
+  bot.command("kana_swap", async (ctx) => {
+    const input = ctx.match.trim();
+    const params = input.split(/\s+/).filter((p: string) => p.length > 0);
+    
+    const fromToken = params[0];
+    const toToken = params[1];
+    const amount = params[2];
+    const slippage = params[3] ? Number.parseFloat(params[3]) : 0.5;
+
+    if (!fromToken || !toToken || !amount) {
+      await ctx.reply("Please provide all required parameters\nUsage: /kana_swap <fromToken> <toToken> <amount> [slippage]\nExample: /kana_swap APT USDC 100 0.5\n\nUse /kana_tokens to see available tokens");
+      return;
+    }
+
+    // Admin-only check for swap execution
+    const userId = ctx.from?.id?.toString();
+    if (userId !== env.TG_CHAT_ID) {
+      await ctx.reply("❌ Swap execution is restricted to administrators only. Use /kana_quotes for quote simulation.");
+      return;
+    }
+
+    await ctx.reply(`🔄 Executing Kanalabs swap: ${amount} ${fromToken} → ${toToken}...`);
+
+    try {
+      const { kanaExecuteSwap, formatKanaSwapResult } = await import("./libs/kanalabs");
+      
+      const result = await kanaExecuteSwap(env, fromToken, toToken, amount, slippage);
+      const response = formatKanaSwapResult(result, fromToken, toToken);
+      
+      await ctx.reply(response, { parse_mode: "Markdown" });
+    } catch (error) {
+      console.error("Error executing Kana swap:", error);
+      await ctx.reply("❌ Error executing swap. Please check the parameters and try again.");
+    }
+  });
+
+  bot.command("kana_tokens", async (ctx) => {
+    try {
+      const { getAvailableTokens } = await import("./libs/kanalabs");
+      
+      const response = getAvailableTokens();
+      await ctx.reply(response, { parse_mode: "Markdown" });
+    } catch (error) {
+      console.error("Error getting available tokens:", error);
+      await ctx.reply("❌ Error fetching available tokens.");
+    }
+  });
+
   bot.command("start", async (ctx) => {
     await ctx.reply("Welcome to AptosDeFiHub! 🚀\n\n" +
       "📊 *Address Management:*\n" +
@@ -827,6 +904,10 @@ _Powered by Panora_
       "🔍 *Nodit Analytics:*\n" +
       "/token_holders [assetType] - Get top token holders for an asset type (default: APT)\n" +
       "/token_activity <address> - Get recent token activity for an address\n\n" +
+      "⚡ *Kanalabs Aggregator:*\n" +
+      "/kana_quotes <fromToken> <toToken> <amount> [slippage] - Get swap quotes from multiple DEXs\n" +
+      "/kana_swap <fromToken> <toToken> <amount> [slippage] - Execute swap with best quote (admin only)\n" +
+      "/kana_tokens - List available tokens for Kanalabs swaps\n\n" +
       "🔧 *Admin Commands:*\n" +
       "/rebalance <poolId> [rangePercent] - Force rebalance all positions in pool (admin only)\n" +
       "/addliquidity <poolId> - Add liquidity to the first position in the specified pool (admin only)\n" +
