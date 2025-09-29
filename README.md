@@ -1,5 +1,7 @@
 # AptosDeFiHub
 
+<img width="1024" height="1024" alt="17a7dfd8-66df-4c1e-abe0-bb62db695757" src="https://github.com/user-attachments/assets/3831a05c-b80a-4ee7-b48b-47f0c4c40b4e" />
+
 ## Description
 
 AptosDeFiHub is a Telegram bot for automated DeFi portfolio management on Aptos, offering liquidity tracking, auto-rebalancing, and real-time analytics
