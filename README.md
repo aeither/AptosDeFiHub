@@ -33,7 +33,7 @@ Eliminate the complexity and constant monitoring required for DeFi liquidity man
 
 ## Hyperion CLM Auto-rebalance for optimal capital efficiency
 
-<img width="1327" height="417" alt="image" src="https://github.com/user-attachments/assets/390d496c-9b0b-4ec4-b7ca-894cea27e8dd" />
+<img width="1315" height="342" alt="image" src="https://github.com/user-attachments/assets/658ed6fa-bc47-4dd5-b34f-ed534c93c38d" />
 
 ## Info
 .dev for polling
