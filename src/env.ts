@@ -6,6 +6,7 @@ export interface Env {
   TG_CHAT_ID: string;
   PRIVATE_KEY: string;
   PANORA_API_KEY: string;
+  NODIT_API_KEY: string;
   
   // KV binding for user address tracking
   USER_ADDRESSES: KVNamespace;

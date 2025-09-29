@@ -763,6 +763,47 @@ _Powered by Panora_
     }
   });
 
+  bot.command("token_holders", async (ctx) => {
+    const assetType = ctx.match.trim() || "0x1::aptos_coin::AptosCoin";
+    
+    await ctx.reply(`🔄 Fetching token holders for ${assetType.split('::').pop() || 'asset'}...`);
+    
+    try {
+      const { getTokenHolders, formatTokenHoldersResponse } = await import("./libs/nodit");
+      
+      const holders = await getTokenHolders(env, assetType, 20);
+      const response = formatTokenHoldersResponse(holders, assetType);
+      
+      await ctx.reply(response, { parse_mode: "Markdown" });
+    } catch (error) {
+      console.error("Error fetching token holders:", error);
+      await ctx.reply("❌ Error fetching token holders. Please check the asset type and try again.");
+    }
+  });
+
+  bot.command("token_activity", async (ctx) => {
+    const address = ctx.match.trim();
+    
+    if (!address) {
+      await ctx.reply("Please provide an address\nUsage: /token_activity <address>\nExample: /token_activity 0x123...");
+      return;
+    }
+    
+    await ctx.reply(`🔄 Fetching token activity for ${address.slice(0, 8)}...${address.slice(-6)}...`);
+    
+    try {
+      const { getAccountTokenActivity, formatTokenActivityResponse } = await import("./libs/nodit");
+      
+      const activity = await getAccountTokenActivity(env, address, 10);
+      const response = formatTokenActivityResponse(activity, address);
+      
+      await ctx.reply(response, { parse_mode: "Markdown" });
+    } catch (error) {
+      console.error("Error fetching token activity:", error);
+      await ctx.reply("❌ Error fetching token activity. Please check the address and try again.");
+    }
+  });
+
   bot.command("start", async (ctx) => {
     await ctx.reply("Welcome to AptosDeFiHub! 🚀\n\n" +
       "📊 *Address Management:*\n" +
@@ -783,6 +824,9 @@ _Powered by Panora_
       "🏊 *TAPP Exchange:*\n" +
       "/tapp_pools - List TAPP exchange pools with TVL and types\n" +
       "/tapp_swap <poolId> <amount> <fromToken> <toToken> [a2b] - Simulate TAPP swap with price impact\n\n" +
+      "🔍 *Nodit Analytics:*\n" +
+      "/token_holders [assetType] - Get top token holders for an asset type (default: APT)\n" +
+      "/token_activity <address> - Get recent token activity for an address\n\n" +
       "🔧 *Admin Commands:*\n" +
       "/rebalance <poolId> [rangePercent] - Force rebalance all positions in pool (admin only)\n" +
       "/addliquidity <poolId> - Add liquidity to the first position in the specified pool (admin only)\n" +
