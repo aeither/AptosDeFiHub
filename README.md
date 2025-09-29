@@ -1,8 +1,10 @@
-# AptosDeFiHub
+
 
 <div align="center">
-    <img src="https://github.com/user-attachments/assets/3831a05c-b80a-4ee7-b48b-47f0c4c40b4e" alt="Logo" width="600">
+    <img src="https://github.com/user-attachments/assets/3831a05c-b80a-4ee7-b48b-47f0c4c40b4e" alt="Logo" width="400">
 </div>
+
+# AptosDeFiHub
 
 ## Description
 
