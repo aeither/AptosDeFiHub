@@ -15,12 +15,21 @@ AptosDeFiHub is a Telegram bot for automated DeFi portfolio management on Aptos,
 Eliminate the complexity and constant monitoring required for DeFi liquidity management by providing intelligent automation that maximizes yields while minimizing user intervention.
 
 ### Key Features
-- **Automated Portfolio Monitoring**: Track multiple Aptos addresses and liquidity positions
-- **Smart Rebalancing**: Automatic position rebalancing when out of range
+- **Automated Portfolio Monitoring**: Track multiple Aptos addresses and liquidity positions powered by Nodit RPC infrastructure
+- **Smart Rebalancing**: Automatic position rebalancing leveraging Hyperion's CLMM for optimal capital efficiency
+- **Intelligent Swap Routing**: Kana Labs aggregation to find best rates across DEXs
+- **Advanced Trading Tools**: Integration with Tapp.Exchange for next-gen DeFi beyond traditional AMMs
 - **Real-time Analytics**: Portfolio value tracking, token balances, and position analysis
 - **Multi-Pool Support**: Manage positions across APT/USDC, APT/stkAPT, APT/kAPT pairs
 - **Telegram Integration**: Complete bot interface for portfolio management
 - **Cloudflare Workers**: Scalable serverless deployment with scheduled automation
+
+### Technology Stack
+- **Hyperion Protocol**: Concentrated Liquidity Market Maker (CLMM) for automated rebalancing and capital efficiency optimization
+- **Kana Labs**: Swap aggregation for best rate discovery across multiple DEXs
+- **Tapp.Exchange**: Next-generation DeFi trading tools beyond traditional AMMs
+- **Nodit RPC**: Reliable Aptos infrastructure for on-chain monitoring and data retrieval
+- **Aptos Blockchain**: Fast, secure, and scalable Layer 1 for DeFi operations
 
 ## Logo Design Prompt
 
